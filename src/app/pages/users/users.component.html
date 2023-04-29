@@ -1,0 +1,73 @@
+<div class="container-fluid">
+  <div class="row mt-2">
+    <div class="col-12">
+      <div
+        class="page-title-box d-flex align-items-center"
+      >
+        <div>
+          <h4 class="mb-0 font-size-18">UserS</h4>
+          <div class="group-description">
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Possimus
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div class="card mt-3">
+        <input
+          type="search"
+          (keyup)="searchuser($event)"
+          class="form-control border-none p-2"
+          placeholder="Search user"
+          style="border: 0;"
+        />
+  </div>
+
+  <div class="card mt-3">
+    <div class="table-responsive">
+      <table class="table table-sm">
+        <thead class="table-light">
+          <tr>
+            <th>Name</th>
+            <th>National ID</th>
+            <th>Gender</th>
+            <th>Sex</th>
+            <th>Verification</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>John</td>
+            <td>Doe</td>
+            <td>john@example.com</td>
+            <td>John</td>
+            <td>Doe</td>
+            <td class="d-flex align-item-center">
+              <button class="a-btn me-2 text-warning">Verification</button> | 
+              <button class="a-btn ms-2 text-danger">Delete</button>
+            </td>
+          </tr>
+          <tr>
+            <td>Mary</td>
+            <td>Moe</td>
+            <td>mary@example.com</td>
+            <td>John</td>
+            <td>Doe</td>
+            <td>john@example.com</td>
+          </tr>
+          <tr>
+            <td>July</td>
+            <td>Dooley</td>
+            <td>july@example.com</td>
+            <td>John</td>
+            <td>Doe</td>
+            <td>john@example.com</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+

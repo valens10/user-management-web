@@ -1,0 +1,23 @@
+<nav class="navbar fixed-top navbar-lightd-flex justify-content-between" style="background-color: #3F4EF3;">
+    <a class="navbar-brand ps-2 text-white" href="#">UMS</a>
+
+    <div class="btn-group me-3">
+      <div class="btn-group" ngbDropdown role="group" aria-label="Button group with nested dropdown">
+        <button type="button" class="btn btn-transparent text-white dropdown-toggle-split" ngbDropdownToggle></button>
+        <div class="dropdown-menu" ngbDropdownMenu>
+          <button ngbDropdownItem routerLink="../ums/profile">Profile <span class="s-verified">verified</span></button>
+          <button ngbDropdownItem>Theme</button>
+        </div>
+      </div>
+      <button type="button" class="btn btn-transparent text-white">nsengvalens4@gmail.com</button>
+    </div>
+
+  </nav>
+  
+  <app-side-nav
+    [isExpanded]="sidebarExpanded"
+    (toggleSidebar)="sidebarExpanded = !sidebarExpanded"
+  ></app-side-nav>
+  <div class="content" [ngClass]="{ sidebarExpanded: sidebarExpanded }">
+    <router-outlet></router-outlet>
+  </div>

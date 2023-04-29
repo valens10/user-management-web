@@ -1,0 +1,14 @@
+<div class="sidebar" [ngClass]="{ 'expanded': isExpanded }">
+    <div class="content">
+      <div class="link">
+        <div class="content" routerLink="../ums/home"  [routerLinkActive]="'active'">
+          <div class="title">Dashboard</div>
+        </div>
+      </div>
+      <div class="link">
+        <div class="content" [routerLink]="['../ums/users']" [routerLinkActive]="'active'">
+          <div class="title">Users</div>
+        </div>
+      </div>
+    </div>
+  </div>
