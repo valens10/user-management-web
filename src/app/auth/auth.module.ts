@@ -5,17 +5,23 @@ import { AuthRoutingModule } from './auth-routing.module';
 import { LoginComponent } from './login/login.component';
 import { ResetPasswordComponent } from './reset-password/reset-password.component';
 import { OtpVerificationComponent } from './otp-verification/otp-verification.component';
+import { NgOtpInputModule } from 'ng-otp-input';
+import { ReactiveFormsModule } from '@angular/forms';
+import { RegisterComponent } from './register/register.component';
 
 
 @NgModule({
   declarations: [
     LoginComponent,
     ResetPasswordComponent,
-    OtpVerificationComponent
+    OtpVerificationComponent,
+    RegisterComponent
   ],
   imports: [
     CommonModule,
-    AuthRoutingModule
+    AuthRoutingModule,
+    NgOtpInputModule,
+    ReactiveFormsModule
   ]
 })
 export class AuthModule { }

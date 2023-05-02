@@ -6,10 +6,13 @@ import { SideNavComponent } from './side-nav/side-nav.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { ProfileComponent } from './profile/profile.component';
 import { UsersComponent } from './users/users.component';
-import { NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbAccordionModule, NgbDropdownModule, NgbModalModule, NgbModule, NgbNavModule } from '@ng-bootstrap/ng-bootstrap';
 import { HomeComponent } from './home/home.component';
 import { UserFormComponent } from './modal/user-form/user-form.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { NgOtpInputModule } from 'ng-otp-input';
+import { IdentificationModalComponent } from './modal/identification-modal/identification-modal.component';
+import { ProfilePicModalComponent } from './modal/profile-pic-modal/profile-pic-modal.component';
 
 
 @NgModule({
@@ -19,13 +22,22 @@ import { ReactiveFormsModule } from '@angular/forms';
     ProfileComponent,
     UsersComponent,
     HomeComponent,
-    UserFormComponent
+    UserFormComponent,
+    IdentificationModalComponent,
+    ProfilePicModalComponent
   ],
   imports: [
     CommonModule,
     PagesRoutingModule,
     NgbDropdownModule,
-    ReactiveFormsModule 
+    ReactiveFormsModule,
+    NgbNavModule,
+    NgbModule,
+    NgbDropdownModule,
+    NgbModalModule,
+    NgbAccordionModule,
+    NgOtpInputModule
+    
   ]
 })
 export class PagesModule { }

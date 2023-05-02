@@ -1,8 +1,13 @@
 .card {
     width: 100% !important; 
+    // height: 30vh !important;
     border: none;
     border-radius: 10px;
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+  }
+
+  p{
+    margin-bottom: 0px !important;
   }
   
   .card-img-top {
@@ -13,6 +18,10 @@
   
   .card-title {
     margin-bottom: 0;
+  }
+
+  .flex-grow-1{
+    text-align: left !important;
   }
   
   .card-text {
@@ -35,3 +44,8 @@
     box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.5);
   }
   
+
+  ul.nav-tabs.nav-tabs-custom.nav {
+    background-color: white;
+    box-shadow: rgba(0, 0, 0, 0.09) 0px 3px 12px;
+  }

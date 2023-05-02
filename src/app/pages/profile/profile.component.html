@@ -12,21 +12,132 @@
     </div>
   </div>
 
-  <div class="card mt-3">
-    <img
-      src="https://via.placeholder.com/150"
-      class="card-img-top p-2"
-      alt="Profile Picture"
-    />
-    <div class="card-body">
-      <h5 class="card-title">User Name</h5>
-      <p class="card-text">Age: 30</p>
-      <p class="card-text">Sex: Male</p>
-      <p class="card-text">National ID: 123456789</p>
-      <p class="card-text">Age: 30</p>
-      <p class="card-text">Sex: Male</p>
-      <p class="card-text">National ID: 123456789</p>
-      <a class="btn btn-primary mt-3" (click)="openEditUserModal()">Edit Profile</a>
-    </div>
+  <div class="content mt-3">
+    <ul
+      ngbNav
+      #customNav="ngbNav"
+      [activeId]="1"
+      class="nav-tabs nav-tabs-custom"
+    >
+      <li [ngbNavItem]="1">
+        <a ngbNavLink>
+          <span class="d-none d-sm-block">Profile</span>
+        </a>
+        <ng-template ngbNavContent>
+          <div class="card mt-3 d-flex flex-wrap flex-row align-items-start">
+            <img
+              src="https://via.placeholder.com/150"
+              class="card-img-top p-2 me-5"
+              alt="Profile Picture"
+            />
+            <div class="p-2 flex-grow-1">
+              <div class="row gx-5">
+                <div class="col-md-4">
+                  Name:
+                </div>
+                <div class="col">
+                  Valens Nsengimana
+                </div>
+              </div>
+              <div class="row gx-5">
+                <div class="col-md-4">
+                  Age:
+                </div>
+                <div class="col">
+                  28
+                </div>
+              </div>
+              <div class="row gx-5">
+                <div class="col-md-4">
+                  Sex:
+                </div>
+                <div class="col">
+                  Female
+                </div>
+              </div>
+              <div class="row gx-5">
+                <div class="col-md-4">
+                  National ID Number:
+                </div>
+                <div class="col">
+                  288847464
+                </div>
+              </div>
+              <div class="row gx-5">
+                <div class="col-md-4">
+                  Martial Status:
+                </div>
+                <div class="col">
+                  Single
+                </div>
+              </div>
+              
+            </div>
+          </div>
+          <a class="btn btn-primary mt-3" (click)="openEditUserModal()">Edit Profile</a>
+        </ng-template>
+      </li>
+      <li [ngbNavItem]="2">
+        <a ngbNavLink>
+          <span class="d-none d-sm-block">Identification</span>
+        </a>
+        <ng-template ngbNavContent>
+          <div class="card mt-3">
+            <div class="card-body">
+              <div class="row gx-5">
+                <div class="col-md-4">
+                  National Id Number:
+                </div>
+                <div class="col">
+                  9585685845845845
+                </div>
+              </div>
+              <div class="row gx-5">
+                <div class="col-md-4">
+                  National Id Document:
+                </div>
+                <div class="col">
+                  <button class="border border-0 text-primary bg-transparent" (click)="openProfilePicture()">View</button> | <button class="border border-0 text-warning bg-transparent">Download</button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <button type="submit" class="btn btn-primary btn-block mt-3 w-100" (click)="openIdentificationModal()">Update Identification</button>
+        </ng-template>
+      </li>
+      <li [ngbNavItem]="3">
+        <a ngbNavLink>
+          <span class="d-none d-sm-block">Change password</span>
+        </a>
+        <ng-template ngbNavContent>
+          <div class="card mt-3">
+            <form class="card-body">
+              <div class="form-group">
+                <label for="email" class="p-1">Email address</label>
+                <input type="email" class="form-control" id="email" aria-describedby="emailHelp" placeholder="Enter email">
+              </div>
+
+              <div class="w-100">
+                <div class="form-group mt-1">
+                    <label for="password" class="p-1">Verification Code</label>
+                    <ng-otp-input [config]="otpConfig"></ng-otp-input>
+                    <small class="text-muted">A code has been sent to <b>nsengvalens4@gmail.com</b></small>
+                  </div>
+                  <div class="form-group mt-1">
+                    <label for="password" class="p-1">New Password</label>
+                    <input type="password" class="form-control" id="password" placeholder="Password">
+                  </div>
+              </div>
+              
+              <button type="submit" class="btn btn-primary btn-block mt-3 w-100">Update Password</button>
+            </form>
+            
+          </div>
+        </ng-template>
+      </li>
+  
+    </ul>
+    <div [ngbNavOutlet]="customNav"></div>
   </div>
 </div>
+
