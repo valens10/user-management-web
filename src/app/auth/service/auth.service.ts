@@ -15,10 +15,6 @@ export class AuthService {
     }),
   };
 
-  fHeaders = {
-    headers: new HttpHeaders({}),
-  };
-
   constructor(private http: HttpClient) {
     const profile = JSON.parse(
       window.sessionStorage.getItem('profile') as string
@@ -29,12 +25,6 @@ export class AuthService {
         headers: new HttpHeaders({
           'Content-Type': 'application/json',
           Accept: 'application/json',
-          Authorization: `Token ${profile.token}`,
-        }),
-      };
-
-      this.fHeaders = {
-        headers: new HttpHeaders({
           Authorization: `Token ${profile.token}`,
         }),
       };

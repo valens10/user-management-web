@@ -36,23 +36,47 @@
                   Name:
                 </div>
                 <div class="col">
-                  Valens Nsengimana
+                  {{profile.first_name? profile.first_name : 'N/A'}} {{profile.last_name ? profile.last_name : ''}}
                 </div>
               </div>
               <div class="row gx-5">
                 <div class="col-md-4">
-                  Age:
+                  Email:
                 </div>
                 <div class="col">
-                  28
+                  {{profile.email? profile.email : 'N/A'}}
                 </div>
               </div>
               <div class="row gx-5">
                 <div class="col-md-4">
-                  Sex:
+                  Date Of Birth:
                 </div>
                 <div class="col">
-                  Female
+                  {{profile.birthdate? profile.birthdate : 'N/A'}}
+                </div>
+              </div>
+              <div class="row gx-5">
+                <div class="col-md-4">
+                  Gender:
+                </div>
+                <div class="col">
+                  {{profile.gender? profile.gender : 'N/A'}}
+                </div>
+              </div>
+              <div class="row gx-5">
+                <div class="col-md-4">
+                  Phone Number:
+                </div>
+                <div class="col">
+                  {{profile.gender? profile.phone_number : 'N/A'}}
+                </div>
+              </div>
+              <div class="row gx-5">
+                <div class="col-md-4">
+                  Nationality:
+                </div>
+                <div class="col">
+                  {{profile.nationality ? profile.nationality : 'N/A'}}
                 </div>
               </div>
               <div class="row gx-5">
@@ -60,7 +84,7 @@
                   National ID Number:
                 </div>
                 <div class="col">
-                  288847464
+                  {{profile.nid_number ? profile.nid_number : 'N/A'}}
                 </div>
               </div>
               <div class="row gx-5">
@@ -68,10 +92,9 @@
                   Martial Status:
                 </div>
                 <div class="col">
-                  Single
+                  {{profile.marital_status ? profile.marital_status : 'N/A'}}
                 </div>
-              </div>
-              
+              </div>             
             </div>
           </div>
           <a class="btn btn-primary mt-3" (click)="openEditUserModal()">Edit Profile</a>
@@ -86,23 +109,16 @@
             <div class="card-body">
               <div class="row gx-5">
                 <div class="col-md-4">
-                  National Id Number:
+                  National ID Document:
                 </div>
                 <div class="col">
-                  9585685845845845
-                </div>
-              </div>
-              <div class="row gx-5">
-                <div class="col-md-4">
-                  National Id Document:
-                </div>
-                <div class="col">
-                  <button class="border border-0 text-primary bg-transparent" (click)="openProfilePicture()">View</button> | <button class="border border-0 text-warning bg-transparent">Download</button>
+                  <input type="file" *ngIf="!profile?.nid_document" required (change)="onFIdSelectionChange($event)">
+                  <button class="border border-0 text-primary bg-transparent" *ngIf="profile?.nid_document" (click)="openNiDocument()">View</button> | <button class="border border-0 text-warning bg-transparent" *ngIf="profile?.nid_document">Download</button>
                 </div>
               </div>
             </div>
           </div>
-          <button type="submit" class="btn btn-primary btn-block mt-3 w-100" (click)="openIdentificationModal()">Update Identification</button>
+          <button type="button" *ngIf="!profile?.nid_document" class="btn btn-primary btn-block mt-3 w-100" (click)="updaloadNationalId()">Upload National ID</button>
         </ng-template>
       </li>
       <li [ngbNavItem]="3">
