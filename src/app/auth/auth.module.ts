@@ -9,6 +9,7 @@ import { NgOtpInputModule } from 'ng-otp-input';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RegisterComponent } from './register/register.component';
 import { HttpClientModule } from '@angular/common/http';
+import { LoginWithMagicLinkComponent } from './login-with-magic-link/login-with-magic-link.component';
 
 
 @NgModule({
@@ -16,7 +17,8 @@ import { HttpClientModule } from '@angular/common/http';
     LoginComponent,
     ResetPasswordComponent,
     OtpVerificationComponent,
-    RegisterComponent
+    RegisterComponent,
+    LoginWithMagicLinkComponent
   ],
   imports: [
     CommonModule,

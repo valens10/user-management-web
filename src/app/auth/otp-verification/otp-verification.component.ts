@@ -54,6 +54,7 @@ export class OtpVerificationComponent implements OnInit {
         (res:any) => {
           this.sucessMsg = 'You have been successful logged in.'
           console.log('res', res);
+          window.sessionStorage.setItem('profile',JSON.stringify(res))
           this.successAlert(this.sucessMsg)
         },
         (err) => {
@@ -69,7 +70,7 @@ export class OtpVerificationComponent implements OnInit {
   // Success alert
   successAlert(message:any) {
     let timerInterval:any
-      Swal.fire({icon: 'success', title: 'Account Reset', html: `${message}`, timer: 2000, timerProgressBar: true,
+      Swal.fire({icon: 'success', title: 'Logged In', html: `${message}`, timer: 2000, timerProgressBar: true,
         didOpen: () => {
           Swal.showLoading()
         },
@@ -80,6 +81,7 @@ export class OtpVerificationComponent implements OnInit {
         /* Read more about handling dismissals below */
         if (result.dismiss === Swal.DismissReason.timer) {
           window.location.href = '../pages/ums/home'
+          
         }
       })
   }

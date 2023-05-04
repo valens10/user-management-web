@@ -4,6 +4,7 @@ import { LoginComponent } from './login/login.component';
 import { ResetPasswordComponent } from './reset-password/reset-password.component';
 import { OtpVerificationComponent } from './otp-verification/otp-verification.component';
 import { RegisterComponent } from './register/register.component';
+import { LoginWithMagicLinkComponent } from './login-with-magic-link/login-with-magic-link.component';
 
 const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: 'login' },
@@ -11,6 +12,7 @@ const routes: Routes = [
   { path: 'reset-password', component:ResetPasswordComponent },
   { path: 'otp-verification', component:OtpVerificationComponent },
   { path: 'register', component:RegisterComponent },
+  { path: 'login-with-link/:login_id', component: LoginWithMagicLinkComponent },
 ];
 
 @NgModule({

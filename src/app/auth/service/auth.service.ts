@@ -60,4 +60,14 @@ export class AuthService {
     return this.http.post(this.BASE_URL + endpoint , data, this.headers);
   }
 
+  generate_magic_link(data: any) {
+    const endpoint = 'auth/generate-magic-link'
+    return this.http.post(this.BASE_URL + endpoint , data, this.headers);
+  }
+
+  login_with_magic_link(loginId: any) {
+    const endpoint = `auth/login-with-magic-link?login_id=${loginId}`
+    return this.http.get(this.BASE_URL + endpoint, this.headers);
+  }
+
 }

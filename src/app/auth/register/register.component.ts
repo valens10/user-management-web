@@ -109,7 +109,7 @@ export class RegisterComponent implements OnInit {
   // Success alert
   successAlert(message:any) {
     let timerInterval:any
-      Swal.fire({icon: 'success', title: 'Account Reset', html: `${message}`, timer: 2000, timerProgressBar: true,
+      Swal.fire({icon: 'success', title: 'Logged In', html: `${message}`, timer: 2000, timerProgressBar: true,
         didOpen: () => {
           Swal.showLoading()
         },

@@ -40,7 +40,25 @@ export class LoginComponent implements OnInit {
         console.log('error--', this.errorMsg)
       })
     } else {
-      this.errorMsg = 'Username is required'
+      this.errorMsg = 'Email is required'
+    }
+  }
+
+  getMagicLink(){
+    this.errorMsg = ''
+    if (this.userForm.valid) {
+      const param = this.userForm.value;
+      this.apiService.generate_magic_link(param).subscribe(
+        (res: any) => {
+          console.log(res)
+        },
+        (err: any) => {
+          this.errorMsg =err?.error['detail']
+          console.log('error--', this.errorMsg)
+        }
+      );
+    }else{
+      this.errorMsg = 'Email is required'
     }
   }
 
