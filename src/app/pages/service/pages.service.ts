@@ -56,4 +56,9 @@ export class PagesService {
     return this.http.post(this.BASE_URL + endpoint, data, this.fHeaders);
   }
 
+  change_password(data: any) {
+    const endpoint = `auth/change-password`;
+    return this.http.post(this.BASE_URL + endpoint, data, this.fHeaders);
+  }
+
 }

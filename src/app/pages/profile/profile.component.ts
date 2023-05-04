@@ -4,6 +4,7 @@ import { UserFormComponent } from '../modal/user-form/user-form.component';
 import { Router } from '@angular/router';
 import { PagesService } from '../service/pages.service';
 import { ProfilePicModalComponent } from '../modal/profile-pic-modal/profile-pic-modal.component';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-profile',
@@ -13,6 +14,8 @@ import { ProfilePicModalComponent } from '../modal/profile-pic-modal/profile-pic
 export class ProfileComponent implements OnInit {
   profile = JSON.parse(window.sessionStorage.getItem('profile') as string);
   formData: FormData = new FormData();
+  passwordErrorMessage = ''
+  form!: FormGroup;
   nid_doc:any
   modalReference!: NgbModalRef;
   otpConfig = {
@@ -27,13 +30,56 @@ export class ProfileComponent implements OnInit {
   constructor( 
     private modalService: NgbModal,
     private apiService: PagesService, 
-    private router:Router
+    private router:Router,
+    private fb: FormBuilder,
     ){}
 
   ngOnInit(): void {
-    console.log(this.profile)
     this.getProfile();
+    this.createPasswordForm()
 
+  }
+
+  createPasswordForm() {
+    this.form = this.fb.group({
+      password: ['', [Validators.required]],
+      new_password: ['',[Validators.required,Validators.minLength(8),Validators.pattern(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*()_+])[a-zA-Z\d!@#$%^&*()_+]{8,}$/),],]
+    });
+  }
+
+  changePassword() {
+    console.log('--->',this.form.valid)
+    this.passwordErrorMessage = ''
+    if (this.form.valid) {
+      let param = this.form.value;
+      this.apiService.change_password(param).subscribe(
+        (response: any) => {
+         console.log(response)
+        },
+        (error: any) => {
+          this.passwordErrorMessage = error?.error['detail']
+          console.log(error?.error['detail'])
+        }
+      );
+    }else{
+      this.formValidation()
+    }
+    
+  }
+
+  formValidation() {
+    const passwordErrors: any = this.form.get('new_password')?.errors; //get password errors
+    console.log(passwordErrors)
+    if (passwordErrors) {
+      if (passwordErrors.required) {
+        this.passwordErrorMessage = 'Password is required.';
+      } else if (passwordErrors.minlength) {
+        this.passwordErrorMessage ='Password must be at least 8 characters long.';
+      } else if (passwordErrors.pattern) {
+        this.passwordErrorMessage =
+          'Password must contain at least one uppercase letter, one lowercase letter, one number, and one special character.';
+      }
+    }
   }
 
 
