@@ -25,79 +25,73 @@
         </a>
         <ng-template ngbNavContent>
           <div class="card mt-3 d-flex flex-wrap flex-row align-items-start">
-            <img
-              src="https://via.placeholder.com/150"
-              class="card-img-top p-2 me-5"
-              alt="Profile Picture"
-            />
+            <div
+              class="_profile-picture p-3"
+              (mouseenter)="showUpload = true"
+              (mouseleave)="showUpload = false"
+            >
+            <div class="profile-picture card-img-top p-5 me-5" [style.background-image]="'url(' + profile?.profile_photo + ')'"></div>
+              <label for="file-upload" class="custom-file-upload mt-2">
+                Change Photo
+              </label>
+              <input type="file" id="file-upload" accept="image/*" (change)="onFileSelected($event)" />
+            </div>
+
             <div class="p-2 flex-grow-1">
               <div class="row gx-5">
-                <div class="col-md-4">
-                  Name:
-                </div>
+                <div class="col-md-4">Name:</div>
                 <div class="col">
-                  {{profile.first_name? profile.first_name : 'N/A'}} {{profile.last_name ? profile.last_name : ''}}
+                  {{ profile.first_name ? profile.first_name : "N/A" }}
+                  {{ profile.last_name ? profile.last_name : "" }}
                 </div>
               </div>
               <div class="row gx-5">
-                <div class="col-md-4">
-                  Email:
-                </div>
+                <div class="col-md-4">Email:</div>
                 <div class="col">
-                  {{profile.email? profile.email : 'N/A'}}
+                  {{ profile.email ? profile.email : "N/A" }}
                 </div>
               </div>
               <div class="row gx-5">
-                <div class="col-md-4">
-                  Date Of Birth:
-                </div>
+                <div class="col-md-4">Date Of Birth:</div>
                 <div class="col">
-                  {{profile.birthdate? profile.birthdate : 'N/A'}}
+                  {{ profile.birthdate ? profile.birthdate : "N/A" }}
                 </div>
               </div>
               <div class="row gx-5">
-                <div class="col-md-4">
-                  Gender:
-                </div>
+                <div class="col-md-4">Gender:</div>
                 <div class="col">
-                  {{profile.gender? profile.gender : 'N/A'}}
+                  {{ profile.gender ? profile.gender : "N/A" }}
                 </div>
               </div>
               <div class="row gx-5">
-                <div class="col-md-4">
-                  Phone Number:
-                </div>
+                <div class="col-md-4">Phone Number:</div>
                 <div class="col">
-                  {{profile.gender? profile.phone_number : 'N/A'}}
+                  {{ profile.gender ? profile.phone_number : "N/A" }}
                 </div>
               </div>
               <div class="row gx-5">
-                <div class="col-md-4">
-                  Nationality:
-                </div>
+                <div class="col-md-4">Nationality:</div>
                 <div class="col">
-                  {{profile.nationality ? profile.nationality : 'N/A'}}
+                  {{ profile.nationality ? profile.nationality : "N/A" }}
                 </div>
               </div>
               <div class="row gx-5">
-                <div class="col-md-4">
-                  National ID Number:
-                </div>
+                <div class="col-md-4">National ID Number:</div>
                 <div class="col">
-                  {{profile.nid_number ? profile.nid_number : 'N/A'}}
+                  {{ profile.nid_number ? profile.nid_number : "N/A" }}
                 </div>
               </div>
               <div class="row gx-5">
-                <div class="col-md-4">
-                  Martial Status:
-                </div>
+                <div class="col-md-4">Martial Status:</div>
                 <div class="col">
-                  {{profile.marital_status ? profile.marital_status : 'N/A'}}
+                  {{ profile.marital_status ? profile.marital_status : "N/A" }}
                 </div>
-              </div>             
+              </div>
             </div>
           </div>
-          <a class="btn btn-primary mt-3" (click)="openEditUserModal()">Edit Profile</a>
+          <a class="btn btn-primary mt-3" (click)="openEditUserModal()"
+            >Edit Profile</a
+          >
         </ng-template>
       </li>
       <li [ngbNavItem]="2">
@@ -108,17 +102,63 @@
           <div class="card mt-3">
             <div class="card-body">
               <div class="row gx-5">
-                <div class="col-md-4">
-                  National ID Document:
-                </div>
+                <div class="col-md-4">Account Status:</div>
                 <div class="col">
-                  <input type="file" *ngIf="!profile?.nid_document" required (change)="onFIdSelectionChange($event)">
-                  <button class="border border-0 text-primary bg-transparent" *ngIf="profile?.nid_document" (click)="openNiDocument()">View</button> | <button class="border border-0 text-warning bg-transparent" *ngIf="profile?.nid_document">Download</button>
+                  <span
+                    class="s-verified text-danger"
+                    *ngIf="profile?.verification_status == 'UNVERIFIED'"
+                    >Unverified</span
+                  >
+                  <span
+                    class="s-verified"
+                    *ngIf="profile?.verification_status == 'VERIFIED'"
+                    >Verified</span
+                  >
+                  <span
+                    class="s-verified text-warning"
+                    *ngIf="
+                      profile?.verification_status == 'PENDING VERIFICATION'
+                    "
+                    >Pending Verification</span
+                  >
+                </div>
+              </div>
+              <div class="row gx-5">
+                <div class="col-md-4">National ID Document:</div>
+                <div class="col">
+                  <input
+                    type="file"
+                    *ngIf="!profile?.nid_document && profile?.verification_status == 'UNVERIFIED'"
+                    required
+                    (change)="onFIdSelectionChange($event)"
+                  />
+                  <button
+                    class="border border-0 text-primary bg-transparent"
+                    *ngIf="profile?.nid_document"
+                    (click)="openNiDocument()"
+                  >
+                    View
+                  </button>
+                  |
+                  <button
+                    (click)="downloadNid()"
+                    class="border border-0 text-warning bg-transparent"
+                    *ngIf="profile?.nid_document"
+                  >
+                    Download
+                  </button>
                 </div>
               </div>
             </div>
           </div>
-          <button type="button" *ngIf="!profile?.nid_document" class="btn btn-primary btn-block mt-3 w-100" (click)="updaloadNationalId()">Upload National ID</button>
+          <button
+            type="button"
+            *ngIf="!profile?.nid_document && profile?.verification_status == 'UNVERIFIED' "
+            class="btn btn-primary btn-block mt-3 w-100"
+            (click)="updaloadNationalId()"
+          >
+            Upload National ID
+          </button>
         </ng-template>
       </li>
       <li [ngbNavItem]="3">
@@ -130,24 +170,41 @@
             <form class="card-body">
               <form [formGroup]="form" class="w-100">
                 <div class="form-group mt-1">
-                    <label for="password" class="p-1">Old Password</label>
-                    <input type="password" class="form-control" id="password" formControlName="password" placeholder="Password">
-                  </div>
-                  <div class="form-group mt-1">
-                    <label for="password1" class="p-1">New Password</label>
-                    <input type="password" class="form-control" id="password1" formControlName="new_password" placeholder="New Password">
-                    <small class="text-danger" *ngIf="passwordErrorMessage">{{passwordErrorMessage}}</small>
-                  </div>
+                  <label for="password" class="p-1">Old Password</label>
+                  <input
+                    type="password"
+                    class="form-control"
+                    id="password"
+                    formControlName="password"
+                    placeholder="Password"
+                  />
+                </div>
+                <div class="form-group mt-1">
+                  <label for="password1" class="p-1">New Password</label>
+                  <input
+                    type="password"
+                    class="form-control"
+                    id="password1"
+                    formControlName="new_password"
+                    placeholder="New Password"
+                  />
+                  <small class="text-danger" *ngIf="passwordErrorMessage">{{
+                    passwordErrorMessage
+                  }}</small>
+                </div>
               </form>
-              <button type="button" class="btn btn-primary btn-block mt-3 w-100" (click)="changePassword()">Update Password</button>
+              <button
+                type="button"
+                class="btn btn-primary btn-block mt-3 w-100"
+                (click)="changePassword()"
+              >
+                Update Password
+              </button>
             </form>
-            
           </div>
         </ng-template>
       </li>
-  
     </ul>
     <div [ngbNavOutlet]="customNav"></div>
   </div>
 </div>
-

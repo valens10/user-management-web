@@ -50,6 +50,11 @@ export class PagesService {
     return this.http.patch(this.BASE_URL + endpoint, data, this.headers);
   }
 
+  update_user_profile_pic(user_id:any,data: any) {
+    const endpoint = `users/${user_id}`;
+    return this.http.patch(this.BASE_URL + endpoint, data, this.fHeaders);
+  }
+
 
   upload_national_id(data: any) {
     const endpoint = `verifications/upload-verification-documents`;

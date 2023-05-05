@@ -14,7 +14,9 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 export class ProfileComponent implements OnInit {
   profile = JSON.parse(window.sessionStorage.getItem('profile') as string);
   formData: FormData = new FormData();
+  showUpload: boolean = false;
   passwordErrorMessage = ''
+  profPic:any = 'https://via.placeholder.com/150'
   form!: FormGroup;
   nid_doc:any
   modalReference!: NgbModalRef;
@@ -57,8 +59,8 @@ export class ProfileComponent implements OnInit {
          console.log(response)
         },
         (error: any) => {
-          this.passwordErrorMessage = error?.error['detail']
-          console.log(error?.error['detail'])
+          this.passwordErrorMessage = error?.error['detail'][2]
+          console.log(error?.error['detail'][2])
         }
       );
     }else{
@@ -155,8 +157,10 @@ export class ProfileComponent implements OnInit {
     }else{
       return
     }
-      
+  }
 
+  downloadNid(){
+    window.open(this.profile?.nid_document)
   }
 
   onFIdSelectionChange($event: any): void {
@@ -168,10 +172,21 @@ export class ProfileComponent implements OnInit {
     }
   }
 
-  onFileSelectionChange($event: any): void {
+  onFileSelected($event: any): void{
     if ($event.target.files && ($event.target.files[0] as File)) {
       const file = $event.target.files[0] as File;
-      this.formData.append('profile_photo', file);
+        this.formData.append('profile_photo', file);  
+        const user_id = this.profile?.id
+        this.apiService.update_user_profile_pic(user_id, this.formData).subscribe(
+          (response: any) => {
+            console.log('response',response)
+            this.getProfile()
+          },
+          (error: any) => {
+            console.log(error?.error)
+          }
+        )    
     }
   }
+
 }
