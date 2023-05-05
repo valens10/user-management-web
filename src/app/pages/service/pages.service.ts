@@ -42,6 +42,11 @@ export class PagesService {
 
   get_user_details(user_id: any) {
     const endpoint = `users/${user_id}`;
+    return this.http.delete(this.BASE_URL + endpoint, this.headers);
+  }
+
+  deleteUser(user_id: any) {
+    const endpoint = `users/${user_id}`;
     return this.http.get(this.BASE_URL + endpoint, this.headers);
   }
 
@@ -55,11 +60,22 @@ export class PagesService {
     return this.http.patch(this.BASE_URL + endpoint, data, this.fHeaders);
   }
 
+  get_users() {
+    const endpoint = `users`;
+    return this.http.get(this.BASE_URL + endpoint, this.headers);
+  }
+
 
   upload_national_id(data: any) {
     const endpoint = `verifications/upload-verification-documents`;
     return this.http.post(this.BASE_URL + endpoint, data, this.fHeaders);
   }
+
+  verify_account(data: any) {
+    const endpoint = `verifications/verify-account`;
+    return this.http.post(this.BASE_URL + endpoint, data, this.headers);
+  }
+
 
   change_password(data: any) {
     const endpoint = `auth/change-password`;

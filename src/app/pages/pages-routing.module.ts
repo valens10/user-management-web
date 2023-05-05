@@ -4,6 +4,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { ProfileComponent } from './profile/profile.component';
 import { UsersComponent } from './users/users.component';
 import { HomeComponent } from './home/home.component';
+import { AuthService } from './guard/auth.service';
 
 const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: 'ums' },
@@ -14,7 +15,7 @@ const routes: Routes = [
       { path: '', pathMatch: 'full', redirectTo: 'home' },
       { path: 'home', component: HomeComponent },
       { path: 'profile', component: ProfileComponent },
-      { path: 'users', component: UsersComponent },
+      { path: 'users', component: UsersComponent, canActivateChild: [AuthService]  },
     ],
   },
 ];

@@ -1,0 +1,33 @@
+<div class="modal-header bg-primary m-0">
+    <div class="d-flex justify-content-start">
+      <h6 class="modal-title text-white">Update Account</h6>
+    </div>
+  </div>
+  <div class="modal-body">
+    <img
+    [src]="User.nid_document"
+    class="card-img-top"
+    alt="Profile Picture"
+  />
+  <p>National Id number: <b>{{User?.nid_number}}</b></p>
+    <form [formGroup]="userForm">
+      <div class="row">
+        <div class="col-md-6 form-group pt-2">
+          <label for="marital_status" class="p-1" >Verification Status: <span class="red-color">*</span></label>
+          <select class="form-control" id="verification_status" formControlName="verification_status">
+            <option [value]="'UNVERIFIED'">Unverified</option>
+            <option [value]="'VERIFIED'">Verified</option>
+          </select>
+        </div>
+      </div>
+    </form>
+    <div class="alert alert-danger mt-1 p-2" role="alert" *ngIf="errorMsg">
+      {{errorMsg}}
+    </div>
+  </div>
+  <div class="modal-footer">
+    <div class="w-100 text-end">
+      <button class="btn btn-primary w-10" (click)="onSubmit()">Update Verification</button>
+    </div>
+  </div>
+  

@@ -13,6 +13,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { NgOtpInputModule } from 'ng-otp-input';
 import { HttpClientModule } from '@angular/common/http';
 import { ProfilePicModalComponent } from './modal/profile-pic-modal/profile-pic-modal.component';
+import { UpdateVerificationComponent } from './modal/update-verification/update-verification.component';
 
 
 @NgModule({
@@ -23,7 +24,8 @@ import { ProfilePicModalComponent } from './modal/profile-pic-modal/profile-pic-
     UsersComponent,
     HomeComponent,
     UserFormComponent,
-    ProfilePicModalComponent
+    ProfilePicModalComponent,
+    UpdateVerificationComponent
   ],
   imports: [
     CommonModule,
