@@ -1,27 +1,36 @@
-# UserManagementSystemWeb
+# User Management System
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 15.2.2.
+This is a user management application which built using the Angular web framework that allows to create, read, update, and delete user information in a database. It provides user interface that enable to manage user accounts, including user authentication, registration, password reset, and profile editing. The system is designed to be scalable, secure, and customizable, making it ideal for applications that require user management functionality.
 
-## Development server
+## Features
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+- User management(CRUD Operation)
+- Notification
+- User Verification
 
-## Code scaffolding
+## Dependencies
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+- Angular cli latest version
+- boostrap latest version
 
-## Build
+## Installation
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+1. Clone the repository:
+`$ git clone https://github.com/valens10/user-management-web.git`
 
-## Running unit tests
+2. Install the dependencies:
+`$ npm install`
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
 
-## Running end-to-end tests
+## Usage
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+- You can access the application using the following base URL:
+`http://localhost:4200/`
+`
+## License
 
-## Further help
+This project is licensed under the MIT License - see the [http://localhost:8000/api/v1/licence/](LICENSE file for details).
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+## Contact
+
+For any questions or suggestions, feel free to contact us at `nsengvalens10@gmail.com`.
