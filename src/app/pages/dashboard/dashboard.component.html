@@ -5,11 +5,16 @@
       <div class="btn-group" ngbDropdown role="group" aria-label="Button group with nested dropdown">
         <button type="button" class="btn btn-transparent text-white dropdown-toggle-split" ngbDropdownToggle></button>
         <div class="dropdown-menu" ngbDropdownMenu>
-          <button ngbDropdownItem routerLink="../ums/profile">Profile <span class="s-verified">verified</span></button>
-          <button ngbDropdownItem>Theme</button>
+          <button ngbDropdownItem routerLink="../ums/profile">Profile 
+            <span class="s-verified text-danger" *ngIf="profile?.verification_status == 'UNVERIFIED'">Unverified</span>
+            <span class="s-verified" *ngIf="profile?.verification_status == 'VERIFIED'">Verified</span>
+            <span class="s-verified text-warning" *ngIf="profile?.verification_status == 'PENDING VERIFICATION'">Pending Verification</span>
+          </button>
+          <button ngbDropdownItem class="text-danger" (click)="logout()">Logout</button>
         </div>
       </div>
-      <button type="button" class="btn btn-transparent text-white">nsengvalens4@gmail.com</button>
+      <button type="button" class="btn btn-transparent text-white" *ngIf="!profile?.first_name">{{profile?.email}}</button>
+      <button type="button" class="btn btn-transparent text-white" *ngIf="profile?.first_name">{{profile?.first_name}} {{profile?.last_name}}</button>
     </div>
 
   </nav>

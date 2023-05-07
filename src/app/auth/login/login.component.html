@@ -4,22 +4,24 @@
         <div class="card mt-5">
           <div class="card-header">Login</div>
           <div class="card-body">
-            <form>
+            <form [formGroup]="userForm">
               <div class="form-group">
                 <label for="email" class="p-1">Email address</label>
-                <input type="email" class="form-control" id="email" aria-describedby="emailHelp" placeholder="Enter email">
+                <input type="email" class="form-control" formControlName="username" required id="email" aria-describedby="emailHelp" placeholder="Enter email">
               </div>
-              <div class="form-group mt-1">
-                <label for="password" class="p-1">Password</label>
-                <input type="password" class="form-control" id="password" placeholder="Password">
-              </div>
-              <button type="submit" class="btn btn-primary btn-block mt-3 w-100">Login</button>
             </form>
+            <div class="alert alert-danger mt-1 mb-1 p-2" role="alert" *ngIf="errorMsg">
+              {{errorMsg}}
+            </div>
+            <button type="submit" class="btn btn-primary btn-block mt-3 w-100" (click)="onSubmit()">Login</button>
           </div>
         </div>
         <div class="text-center justify-content-between d-flex mt-3">
-          <a href="">Forgot password?</a>
-          <a href="">Sign up</a>
+          <a href="" routerLink="/auth/reset-password">Forgot password?</a>
+          <div class="end-section">
+            <a class="me-3 magic-link" (click)="getMagicLink()">Login with magic link</a>
+            <button class="border border-0 text-white bg-primary">Sign up</button>
+          </div>
         </div>
       </div>
     </div>

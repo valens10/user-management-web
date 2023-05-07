@@ -1,68 +1,75 @@
 <div class="modal-header bg-primary m-0">
   <div class="d-flex justify-content-start">
-    <h6 class="modal-title text-white">hi</h6>
+    <h6 class="modal-title text-white">Update Account</h6>
   </div>
 </div>
 <div class="modal-body">
   <form [formGroup]="userForm">
-    <div class="form-group">
-      <label for="name">Name</label>
-      <input
-        type="text"
-        class="form-control"
-        id="name"
-        formControlName="name"
-      />
+    <div class="row">
+      <div class="col-md-6 form-group pt-2">
+        <label for="first_name" class="p-1">First Name: <span class="red-color">*</span></label>
+        <input type="text" class="form-control" id="first_name" formControlName="first_name">
+      </div>
+      <div class="col-md-6 form-group pt-2">
+        <label for="last_name" class="p-1">Last Name: <span class="red-color">*</span></label>
+        <input type="text" class="form-control" id="last_name" formControlName="last_name">
+      </div>
     </div>
-    <div class="form-group">
-      <label for="email">Email</label>
-      <input
-        type="email"
-        class="form-control"
-        id="email"
-        formControlName="email"
-      />
+    <div class="row">
+      <div class="col-md-6 form-group pt-2">
+        <label for="email" class="p-1">Email: <span class="red-color">*</span></label>
+        <input type="email" class="form-control" id="email" formControlName="email">
+      </div>
+
+      <div class="col-md-6 form-group pt-2">
+        <label for="gender" class="p-1">Gender: <span class="red-color">*</span></label>
+        <select class="form-control" id="gender" formControlName="gender">
+          <option value="MALE">Male</option>
+          <option value="FEMALE">Female</option>
+        </select>
+      </div>
     </div>
-    <div class="form-group">
-      <label for="phone">Phone</label>
-      <input
-        type="text"
-        class="form-control"
-        id="phone"
-        formControlName="phone"
-      />
+
+    <div class="row">
+      <div class="col-md-6 form-group pt-2">
+        <label for="birthdate" class="p-1">Birthdate: <span class="red-color">*</span></label>
+        <input type="date" class="form-control" id="birthdate" formControlName="birthdate">
+      </div>
+      <div class="col-md-6 form-group pt-2">
+        <label for="marital_status" class="p-1" >Marital Status: <span class="red-color">*</span></label>
+        <select class="form-control" id="marital_status" formControlName="marital_status">
+          <option [value]="'SINGLE'">Single</option>
+          <option [value]="'MARRIED'">Married</option>
+          <option [value]="'DIVORCED'">Divorced</option>
+          <option [value]="'WIDOWED'">Widowed</option>
+        </select>
+      </div>
     </div>
-    <div class="form-group">
-      <label for="age">Age</label>
-      <input
-        type="number"
-        class="form-control"
-        id="age"
-        formControlName="age"
-      />
+    <div class="row">
+      <div class="col-md-6 form-group pt-2">
+        <label for="nationality" class="p-1">Nationality:</label>
+        <select class="form-control" id="marital_status" formControlName="nationality">
+          <option *ngFor="let item of countries" [value]="item?.isoCode">{{item?.name}}</option>
+        </select>
+      </div>
+      <div class="col-md-6 form-group pt-2">
+        <label for="nid_number" class="p-1">NID Number:</label>
+        <input type="text" class="form-control" id="nid_number" formControlName="nid_number">
+      </div>
     </div>
-    <div class="form-group">
-      <label for="nationalId">National ID</label>
-      <input
-        type="text"
-        class="form-control"
-        id="nationalId"
-        formControlName="nationalId"
-      />
-    </div>
-    <div class="form-group">
-      <label for="martialStatus">Martial Status</label>
-      <input
-        type="text"
-        class="form-control"
-        id="martialStatus"
-        formControlName="martialStatus"
-      />
+    <div class="row">
+      <div class="col-md-6 form-group pt-2">
+        <label for="birthdate" class="p-1">Phone Number: <span class="red-color">*</span></label>
+        <input type="tel" class="form-control" id="birthdate" formControlName="phone_number">
+      </div>
     </div>
   </form>
+  <div class="alert alert-danger mt-1 p-2" role="alert" *ngIf="errorMsg">
+    {{errorMsg}}
+  </div>
 </div>
 <div class="modal-footer">
-  <div class="w-100 text-center">
-    <button>Submit</button>
+  <div class="w-100 text-end">
+    <button class="btn btn-primary w-10" (click)="onSubmit()">Update Account</button>
   </div>
 </div>

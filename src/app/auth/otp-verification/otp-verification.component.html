@@ -2,21 +2,37 @@
     <div class="row justify-content-center">
       <div class="col-md-6">
         <div class="card mt-5">
-          <div class="card-header">Otp Verification</div>
+          <div class="card-header">Mult-Factor Authentication</div>
           <div class="card-body">
-            <form [formGroup]="verificationForm">
+            <form [formGroup]="formGroup">
+
               <div class="form-group">
-                <label for="verificationCode" class="p-1">Verification code</label>
-                <ng-otp-input formControlName="verificationCode" [config]="otpConfig"></ng-otp-input>
-                <small class="text-muted">A code has been sent to <b>nsengvalens4@gmail.com</b></small>
+                <label for="email" class="p-1">Email address</label>
+                <input type="email" class="form-control" formControlName="username" required id="email" aria-describedby="emailHelp" placeholder="Enter email">
               </div>
-              <button type="submit" class="btn btn-primary btn-block mt-3 w-100">Proceed</button>
+
+              <div class="form-group">
+                <label for="code" class="p-1">Verification Code</label>
+                <ng-otp-input  [formCtrl]="otpControl"  [config]="{length:6}"></ng-otp-input>
+                <small class="text-muted">Verification code has sent to <i>{{username}}</i></small>
+              </div>
+
+              <div class="form-group mt-1 mb-1">
+                <label for="password" class="p-1">Password</label>
+                <input type="password" class="form-control" formControlName="password" required id="password" placeholder="Password">
+              </div>
             </form>
+
+            <div class="alert alert-danger mt-1 mb-1 p-2" role="alert" *ngIf="errorMsg">
+              {{errorMsg}}
+            </div>
+
+            <button type="button" class="btn btn-primary btn-block mt-3 w-100" (click)="onSubmit()">Verify & Proceed</button>
           </div>
         </div>
         <div class="text-center justify-content-between d-flex mt-3">
           <a href=""></a>
-          <a href="">Back to login</a>
+          <a href="" routerLink="/auth/login">Back to login</a>
         </div>
       </div>
     </div>

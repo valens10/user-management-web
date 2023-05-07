@@ -30,40 +30,33 @@
         <thead class="table-light">
           <tr>
             <th>Name</th>
+            <th>Email</th>
             <th>National ID</th>
             <th>Gender</th>
-            <th>Sex</th>
+            <th>Age</th>
             <th>Verification</th>
             <th>Action</th>
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>John</td>
-            <td>Doe</td>
-            <td>john@example.com</td>
-            <td>John</td>
-            <td>Doe</td>
-            <td class="d-flex align-item-center">
-              <button class="a-btn me-2 text-warning">Verification</button> | 
-              <button class="a-btn ms-2 text-danger">Delete</button>
+          <tr *ngFor="let user of users">
+            <td>{{user?.first_name | titlecase}} {{user?.last_name | titlecase}}</td>
+            <td>{{user?.email}}</td>
+            <td>{{user?.nid_number}}</td>
+            <td>
+              <span class="" *ngIf="user?.gender == 'MALE'">Male</span>
+              <span class="" *ngIf="user?.gender == 'FEMALE'">Female</span>
             </td>
-          </tr>
-          <tr>
-            <td>Mary</td>
-            <td>Moe</td>
-            <td>mary@example.com</td>
-            <td>John</td>
-            <td>Doe</td>
-            <td>john@example.com</td>
-          </tr>
-          <tr>
-            <td>July</td>
-            <td>Dooley</td>
-            <td>july@example.com</td>
-            <td>John</td>
-            <td>Doe</td>
-            <td>john@example.com</td>
+            <td>{{user?.age}}</td>
+            <td>
+              <span class="s-verified text-danger" *ngIf="user?.verification_status == 'UNVERIFIED'">Unverified</span>
+              <span class="s-verified" style="color: green;" *ngIf="user?.verification_status == 'VERIFIED'">Verified</span>
+              <span class="s-verified text-warning" *ngIf="user?.verification_status == 'PENDING VERIFICATION'">Pending Verification</span>
+            </td>
+            <td class="d-flex align-item-center">
+              <button class="a-btn me-2 text-info" (click)="verifyUser(user)">Verification</button> | 
+              <button class="a-btn ms-2 text-danger" (click)="deleteUser(user.id)">Delete</button>
+            </td>
           </tr>
         </tbody>
       </table>

@@ -11,8 +11,9 @@ import { HomeComponent } from './home/home.component';
 import { UserFormComponent } from './modal/user-form/user-form.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { NgOtpInputModule } from 'ng-otp-input';
-import { IdentificationModalComponent } from './modal/identification-modal/identification-modal.component';
+import { HttpClientModule } from '@angular/common/http';
 import { ProfilePicModalComponent } from './modal/profile-pic-modal/profile-pic-modal.component';
+import { UpdateVerificationComponent } from './modal/update-verification/update-verification.component';
 
 
 @NgModule({
@@ -23,8 +24,8 @@ import { ProfilePicModalComponent } from './modal/profile-pic-modal/profile-pic-
     UsersComponent,
     HomeComponent,
     UserFormComponent,
-    IdentificationModalComponent,
-    ProfilePicModalComponent
+    ProfilePicModalComponent,
+    UpdateVerificationComponent
   ],
   imports: [
     CommonModule,
@@ -36,7 +37,8 @@ import { ProfilePicModalComponent } from './modal/profile-pic-modal/profile-pic-
     NgbDropdownModule,
     NgbModalModule,
     NgbAccordionModule,
-    NgOtpInputModule
+    NgOtpInputModule,
+    HttpClientModule
     
   ]
 })

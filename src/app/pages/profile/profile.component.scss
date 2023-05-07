@@ -49,3 +49,40 @@
     background-color: white;
     box-shadow: rgba(0, 0, 0, 0.09) 0px 3px 12px;
   }
+
+  .s-verified{
+    background-color: rgb(237, 237, 237);
+    border-radius: 20px !important;
+    color: green;
+    font-size: 13px !important;
+    padding: 2px !important;
+  }
+
+  
+  
+  .profile-picture{
+    width: 80px;
+    height: 80px;
+    background-size: cover;
+    background-position: center;
+  }
+  
+  .profile-picture:hover {
+    opacity: 1;
+  }
+
+  
+  .custom-file-upload {
+    cursor: pointer;
+    padding: 3px;
+    background-color: #f1f1f1;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-weight: bold;
+    font-size: 14px;
+    color: #333;
+  }
+  
+  #file-upload {
+    display: none;
+  }
