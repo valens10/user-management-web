@@ -25,16 +25,20 @@
         </a>
         <ng-template ngbNavContent>
           <div class="card mt-3 d-flex flex-wrap flex-row align-items-start">
-            <div
-              class="_profile-picture p-3"
-              (mouseenter)="showUpload = true"
-              (mouseleave)="showUpload = false"
+            <div class="prof d-flex flex-wrap flex-column p-5 me-5">
+              <img class="card-img-top " *ngIf="!profile?.profile_photo" [src]="profPic" alt="">
+              <div
+              class="_profile-picture"
             >
-            <div class="profile-picture card-img-top p-5 me-5" [style.background-image]="'url(' + profile?.profile_photo + ')'"></div>
+            <div class="profile-picture card-img-top" 
+              *ngIf="profile?.profile_photo" 
+              [style.background-image]="'url(' + profile?.profile_photo + ')'">
+          </div>
               <label for="file-upload" class="custom-file-upload mt-2">
                 Change Photo
               </label>
               <input type="file" id="file-upload" accept="image/*" (change)="onFileSelected($event)" />
+            </div>
             </div>
 
             <div class="p-2 flex-grow-1">

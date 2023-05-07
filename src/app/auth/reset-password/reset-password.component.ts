@@ -12,6 +12,7 @@ import Swal from 'sweetalert2';
 export class ResetPasswordComponent implements OnInit {
   profile: any = {};
   errorMsg = '';
+  isLoading = false
   sucessMsg = ''
   email:any = ''
   is_code_sent = false
@@ -51,15 +52,18 @@ export class ResetPasswordComponent implements OnInit {
     if (this.formGroup.valid) {
       const param = this.formGroup.value;
       param['username'] = this.email
+      this.isLoading = true
       this.apiService.change_password(param).subscribe(
         (res:any) => {
           this.sucessMsg = 'Your password has been changed successful.'
           console.log('res', res);
           this.successAlert(this.sucessMsg)
+          this.isLoading = false
         },
         (err) => {
           this.errorMsg = err?.error['detail'];
           console.log('error--', this.errorMsg);
+          this.isLoading = false
 
         }
       );

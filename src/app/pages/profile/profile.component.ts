@@ -14,7 +14,6 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 export class ProfileComponent implements OnInit {
   profile = JSON.parse(window.sessionStorage.getItem('profile') as string);
   formData: FormData = new FormData();
-  showUpload: boolean = false;
   passwordErrorMessage = ''
   profPic:any = 'https://via.placeholder.com/150'
   form!: FormGroup;

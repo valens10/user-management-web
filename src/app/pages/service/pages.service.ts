@@ -42,12 +42,12 @@ export class PagesService {
 
   get_user_details(user_id: any) {
     const endpoint = `users/${user_id}`;
-    return this.http.delete(this.BASE_URL + endpoint, this.headers);
+    return this.http.get(this.BASE_URL + endpoint, this.headers);
   }
 
   deleteUser(user_id: any) {
     const endpoint = `users/${user_id}`;
-    return this.http.get(this.BASE_URL + endpoint, this.headers);
+    return this.http.delete(this.BASE_URL + endpoint, this.headers);
   }
 
   update_user_details(user_id:any,data: any) {

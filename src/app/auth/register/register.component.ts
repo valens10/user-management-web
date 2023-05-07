@@ -13,6 +13,7 @@ export class RegisterComponent implements OnInit {
   profile: any = {};
   errorMsg = '';
   sucessMsg = ''
+  isLoading = false
   email:any = ''
   is_code_sent = false
   passwordErrorMessage = '';
@@ -51,15 +52,18 @@ export class RegisterComponent implements OnInit {
     if (this.formGroup.valid) {
       const param = this.formGroup.value;
       param['username'] = this.email
+      this.isLoading = true
       this.apiService.change_password(param).subscribe(
         (res:any) => {
           this.sucessMsg = 'Your account has been created successful. '
           console.log('res', res);
           this.successAlert(this.sucessMsg)
+          this.isLoading = false
         },
         (err) => {
           this.errorMsg = err?.error['detail'];
           console.log('error--', this.errorMsg);
+          this.isLoading = false
         }
       );
     } else {
@@ -89,15 +93,18 @@ export class RegisterComponent implements OnInit {
       const param = {
         username:this.email
       }
+      this.isLoading = true
       this.apiService.request_otp(param).subscribe(
         (res:any) => {
           this.sucessMsg = res['detail']
           this.is_code_sent = true
+          this.isLoading = false
         },
         (err) => {
           this.is_code_sent = false
           this.errorMsg = err?.error['detail'];
           console.log('error--', this.errorMsg);
+          this.isLoading = false
         }
       );
     }else{
@@ -109,7 +116,7 @@ export class RegisterComponent implements OnInit {
   // Success alert
   successAlert(message:any) {
     let timerInterval:any
-      Swal.fire({icon: 'success', title: 'Logged In', html: `${message}`, timer: 2000, timerProgressBar: true,
+      Swal.fire({icon: 'success', title: 'Registration', html: `${message}`, timer: 2000, timerProgressBar: true,
         didOpen: () => {
           Swal.showLoading()
         },

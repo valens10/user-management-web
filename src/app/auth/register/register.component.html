@@ -29,8 +29,13 @@
               {{errorMsg}}
             </div>
 
-            <button *ngIf="!is_code_sent" type="button" class="btn btn-primary btn-block mt-3 w-100" (click)="sendOtp()">Register</button>
-            <button *ngIf="is_code_sent" type="button" class="btn btn-primary btn-block mt-3 w-100" (click)="onSubmit()">Proceed</button>
+            <button *ngIf="!is_code_sent && !isLoading" type="button" class="btn btn-primary btn-block mt-3 w-100" (click)="sendOtp()">Register</button>
+            <button *ngIf="is_code_sent && !isLoading" type="button" class="btn btn-primary btn-block mt-3 w-100" (click)="onSubmit()">Proceed</button>
+
+            <div class="_loading w-100 d-flex justify-content-center">
+              <img class="loading-img" *ngIf="isLoading" src="../../../assets/Loading_icon.gif" alt="">
+            </div>
+
           </div>
         </div>
         <div class="text-center justify-content-between d-flex mt-3">

@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { PagesService } from '../service/pages.service';
 import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import { UpdateVerificationComponent } from '../modal/update-verification/update-verification.component';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-users',
@@ -19,8 +20,11 @@ export class UsersComponent implements OnInit{
   constructor(
     private apiService: PagesService, 
     private router:Router,
+    private _location: Location,
     private modalService: NgbModal,
-  ){}
+  ){
+    if(!this.profile.is_staff){this._location.back()}
+  }
 
   ngOnInit(): void {
     this.getUsers()

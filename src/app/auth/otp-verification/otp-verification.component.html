@@ -27,7 +27,12 @@
               {{errorMsg}}
             </div>
 
-            <button type="button" class="btn btn-primary btn-block mt-3 w-100" (click)="onSubmit()">Verify & Proceed</button>
+            <button type="button" class="btn btn-primary btn-block mt-3 w-100" *ngIf="!isLoading" (click)="onSubmit()">Verify & Proceed</button>
+
+            <div class="_loading w-100 d-flex justify-content-center">
+              <img class="loading-img" *ngIf="isLoading" src="../../../assets/Loading_icon.gif" alt="">
+            </div>
+
           </div>
         </div>
         <div class="text-center justify-content-between d-flex mt-3">

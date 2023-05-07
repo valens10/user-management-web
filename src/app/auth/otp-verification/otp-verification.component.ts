@@ -11,6 +11,7 @@ import Swal from 'sweetalert2';
 export class OtpVerificationComponent implements OnInit {
   profile: any = {};
   errorMsg = '';
+  isLoading = false
   sucessMsg = ''
   username:any = ''
   passwordErrorMessage = '';
@@ -50,16 +51,19 @@ export class OtpVerificationComponent implements OnInit {
       const param = this.formGroup.value;
       param['username'] = this.username
 
+      this.isLoading = true
       this.apiService.login(param).subscribe(
         (res:any) => {
           this.sucessMsg = 'You have been successful logged in.'
           console.log('res', res);
           window.sessionStorage.setItem('profile',JSON.stringify(res))
           this.successAlert(this.sucessMsg)
+          this.isLoading = false
         },
         (err) => {
           this.errorMsg = err?.error['detail'];
           console.log('error--', this.errorMsg);
+          this.isLoading =  false
         }
       );
     } else {
