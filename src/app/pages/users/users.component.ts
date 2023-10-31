@@ -48,7 +48,7 @@ export class UsersComponent implements OnInit {
     this.apiService.deleteUser(param).subscribe(
       (response: any) => {
 
-        this.getUsers()
+        window.location.reload()
       },
       (error: any) => {
 
