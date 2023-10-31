@@ -12,27 +12,27 @@ export class UpdateVerificationComponent implements OnInit {
   profile = JSON.parse(window.sessionStorage.getItem('profile') as string);
   userForm!: FormGroup;
   errorMsg = ''
-  countries:any = countries
-  @Input() public User:any = {};
+  countries: any = countries
+  @Input() public User: any = {};
   @Input() public ref: any;
-  constructor(private fb: FormBuilder, private apiService: PagesService, ) {}
+  constructor(private fb: FormBuilder, private apiService: PagesService,) { }
 
   ngOnInit() {
-   this.createForm()
-   console.log(this.countries)
+    this.createForm()
+
   }
 
 
   createForm() {
-     this.userForm = this.fb.group({
-      verification_status:['', [Validators.required]],
+    this.userForm = this.fb.group({
+      verification_status: ['', [Validators.required]],
     });
   }
 
   // Onsubmit
-  onSubmit(){
+  onSubmit() {
     this.errorMsg = ''
-    if(this.userForm.valid){
+    if (this.userForm.valid) {
       const param = this.userForm.value
       param['user'] = this.User.id
       this.apiService.verify_account(param).subscribe(
@@ -40,10 +40,10 @@ export class UpdateVerificationComponent implements OnInit {
           this.ref.close(response)
         },
         (error: any) => {
-          console.log(error)
+
         }
       );
-    }else{
+    } else {
       this.errorMsg = 'Verification status is required.'
     }
   }

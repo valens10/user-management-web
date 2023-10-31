@@ -8,10 +8,10 @@ import { Component, Input, OnInit } from '@angular/core';
 export class ProfilePicModalComponent implements OnInit {
   @Input() public nid_doc: any = '';
   @Input() public ref: any;
-  constructor() {}
+  constructor() { }
 
   ngOnInit(): void {
-    console.log(this.nid_doc)
+
     //throw new Error('Method not implemented.');
   }
 }

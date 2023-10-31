@@ -1,4 +1,4 @@
-import { Component, OnInit} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { PagesService } from '../service/pages.service';
 import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
@@ -10,53 +10,53 @@ import { Location } from '@angular/common';
   templateUrl: './users.component.html',
   styleUrls: ['./users.component.scss']
 })
-export class UsersComponent implements OnInit{
-  userFilter:any = ''
+export class UsersComponent implements OnInit {
+  userFilter: any = ''
   modalReference!: NgbModalRef;
   profile = JSON.parse(window.sessionStorage.getItem('profile') as string);
 
-  users:any = []
+  users: any = []
 
   constructor(
-    private apiService: PagesService, 
-    private router:Router,
+    private apiService: PagesService,
+    private router: Router,
     private _location: Location,
     private modalService: NgbModal,
-  ){
-    if(!this.profile.is_staff){this._location.back()}
+  ) {
+    if (!this.profile.is_staff) { this._location.back() }
   }
 
   ngOnInit(): void {
     this.getUsers()
-   
+
   }
 
   getUsers() {
     this.apiService.get_users().subscribe(
       (response: any) => {
         this.users = response
-        console.log(this.users)
+
       },
-      (error:any) => {
-        console.log(error)
+      (error: any) => {
+
       }
     );
   }
 
-  deleteUser(user_id:any){
+  deleteUser(user_id: any) {
     const param = this.profile.id
     this.apiService.deleteUser(param).subscribe(
       (response: any) => {
-        console.log(response)
+
         this.getUsers()
       },
-      (error:any) => {
-        console.log(error)
+      (error: any) => {
+
       }
     );
   }
 
-  verifyUser(user:any){
+  verifyUser(user: any) {
     this.modalReference = this.modalService.open(UpdateVerificationComponent, {
       centered: false,
       size: 'lg',
@@ -66,7 +66,7 @@ export class UsersComponent implements OnInit{
     this.modalReference.result.then(
       (data) => {
         this.getUsers()
-        
+
       },
       (reason) => {
         // on dismiss
@@ -74,7 +74,7 @@ export class UsersComponent implements OnInit{
     );
   }
 
-  searchuser(event:Event){}
+  searchuser(event: Event) { }
 }
 
 

@@ -1,8 +1,17 @@
-.content{
-    height: 50vh !important;
-    background-color: white;
+.content {
+  height: 50vh !important;
+  background-color: white;
 }
 
-a{
-    text-decoration: none;
+a {
+  text-decoration: none;
+}
+
+.status {
+  margin-top: -26px !important;
+  background-color: #f7f7f7;
+  border-radius: 6px;
+  font-size: 13px;
+  color: black !important;
+  padding: 3px !important;
 }

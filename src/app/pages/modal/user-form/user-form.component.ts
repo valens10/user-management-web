@@ -12,35 +12,35 @@ export class UserFormComponent {
   profile = JSON.parse(window.sessionStorage.getItem('profile') as string);
   userForm!: FormGroup;
   errorMsg = ''
-  countries:any = countries
-  @Input() public User:any = {};
+  countries: any = countries
+  @Input() public User: any = {};
   @Input() public ref: any;
-  constructor(private fb: FormBuilder, private apiService: PagesService, ) {}
+  constructor(private fb: FormBuilder, private apiService: PagesService,) { }
 
   ngOnInit() {
-   this.createForm()
-   console.log(this.countries)
+    this.createForm()
+
   }
 
 
   createForm() {
-     this.userForm = this.fb.group({
-      phone_number:[this.User.phone_number],
+    this.userForm = this.fb.group({
+      phone_number: [this.User.phone_number],
       birthdate: [this.User.birthdate, [Validators.required]],
       email: [this.User.email, [Validators.required]],
       first_name: [this.User.first_name, [Validators.required]],
       last_name: [this.User.last_name, [Validators.required]],
       gender: [this.User.gender, [Validators.required]],
       marital_status: [this.User.marital_status, [Validators.required]],
-      nationality:[this.profile.nationality? this.getCountryCode(this.profile.nationality): '',[Validators.required]],
-      nid_number: [this.User.nationality, [Validators.required]]
+      nationality: [this.profile.nationality ? this.getCountryCode(this.profile.nationality) : '', [Validators.required]],
+      nid_number: [this.User.nid_number, [Validators.required]]
     });
   }
 
   // Onsubmit
-  onSubmit(){
+  onSubmit() {
     this.errorMsg = ''
-    if(this.userForm.valid){
+    if (this.userForm.valid) {
       const param = this.userForm.value
       const user_id = this.profile.id
       this.apiService.update_user_details(user_id, param).subscribe(
@@ -51,7 +51,7 @@ export class UserFormComponent {
           this.errorMsg = 'A user with the phone number Alread exist'
         }
       );
-    }else{
+    } else {
       this.errorMsg = 'All inputs with red (*) are required'
     }
   }

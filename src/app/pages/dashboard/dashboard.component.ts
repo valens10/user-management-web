@@ -11,22 +11,22 @@ import { Router } from '@angular/router';
 export class DashboardComponent implements OnInit {
   sidebarExpanded = true;
   profile = JSON.parse(window.sessionStorage.getItem('profile') as string);
-  constructor(private apiService: PagesService, private router:Router){}
+  constructor(private apiService: PagesService, private router: Router) { }
 
   ngOnInit(): void {
-    console.log(this.profile)
+
   }
 
 
   logout() {
-    window.sessionStorage.clear(); 
+    window.sessionStorage.clear();
     this.apiService.headers = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
         Accept: 'application/json',
       })
-    }; 
+    };
 
-     this.router.navigate(['/auth/login']); 
+    this.router.navigate(['/auth/login']);
   }
 }

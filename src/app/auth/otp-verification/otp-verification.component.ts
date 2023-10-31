@@ -13,7 +13,7 @@ export class OtpVerificationComponent implements OnInit {
   errorMsg = '';
   isLoading = false
   sucessMsg = ''
-  username:any = ''
+  username: any = ''
   passwordErrorMessage = '';
   formGroup!: FormGroup;
   otpConfig = {
@@ -39,9 +39,9 @@ export class OtpVerificationComponent implements OnInit {
 
   createForm() {
     this.formGroup = this.fb.group({
-      username: [{value:this.username, disabled:true},Validators.required],
+      username: [{ value: this.username, disabled: true }, Validators.required],
       code: ['', Validators.required],
-      password: ['',[Validators.required,]]
+      password: ['', [Validators.required,]]
     });
   }
 
@@ -53,41 +53,42 @@ export class OtpVerificationComponent implements OnInit {
 
       this.isLoading = true
       this.apiService.login(param).subscribe(
-        (res:any) => {
+        (res: any) => {
           this.sucessMsg = 'You have been successful logged in.'
-          console.log('res', res);
-          window.sessionStorage.setItem('profile',JSON.stringify(res))
+
+          window.sessionStorage.setItem('profile', JSON.stringify(res))
           this.successAlert(this.sucessMsg)
           this.isLoading = false
         },
         (err) => {
           this.errorMsg = err?.error['detail'];
-          console.log('error--', this.errorMsg);
-          this.isLoading =  false
+
+          this.isLoading = false
         }
       );
     } else {
-     this.errorMsg = 'All input are required.'
+      this.errorMsg = 'All input are required.'
     }
   }
 
   // Success alert
-  successAlert(message:any) {
-    let timerInterval:any
-      Swal.fire({icon: 'success', title: 'Logged In', html: `${message}`, timer: 2000, timerProgressBar: true,
-        didOpen: () => {
-          Swal.showLoading()
-        },
-        willClose: () => {
-          clearInterval(timerInterval)
-        }
-      }).then((result) => {
-        /* Read more about handling dismissals below */
-        if (result.dismiss === Swal.DismissReason.timer) {
-          window.location.href = '../pages/ums/home'
-          
-        }
-      })
+  successAlert(message: any) {
+    let timerInterval: any
+    Swal.fire({
+      icon: 'success', title: 'Logged In', html: `${message}`, timer: 2000, timerProgressBar: true,
+      didOpen: () => {
+        Swal.showLoading()
+      },
+      willClose: () => {
+        clearInterval(timerInterval)
+      }
+    }).then((result) => {
+      /* Read more about handling dismissals below */
+      if (result.dismiss === Swal.DismissReason.timer) {
+        window.location.href = '../pages/ums/home'
+
+      }
+    })
   }
 
 }

@@ -15,9 +15,9 @@ export class ProfileComponent implements OnInit {
   profile = JSON.parse(window.sessionStorage.getItem('profile') as string);
   formData: FormData = new FormData();
   passwordErrorMessage = ''
-  profPic:any = 'https://via.placeholder.com/150'
+  profPic: any = 'https://via.placeholder.com/150'
   form!: FormGroup;
-  nid_doc:any
+  nid_doc: any
   modalReference!: NgbModalRef;
   otpConfig = {
     length: 6,
@@ -28,12 +28,12 @@ export class ProfileComponent implements OnInit {
     }
   };
 
-  constructor( 
+  constructor(
     private modalService: NgbModal,
-    private apiService: PagesService, 
-    private router:Router,
+    private apiService: PagesService,
+    private router: Router,
     private fb: FormBuilder,
-    ){}
+  ) { }
 
   ngOnInit(): void {
     this.getProfile();
@@ -44,38 +44,38 @@ export class ProfileComponent implements OnInit {
   createPasswordForm() {
     this.form = this.fb.group({
       password: ['', [Validators.required]],
-      new_password: ['',[Validators.required,Validators.minLength(8),Validators.pattern(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*()_+])[a-zA-Z\d!@#$%^&*()_+]{8,}$/),],]
+      new_password: ['', [Validators.required, Validators.minLength(8), Validators.pattern(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*()_+])[a-zA-Z\d!@#$%^&*()_+]{8,}$/),],]
     });
   }
 
   changePassword() {
-    console.log('--->',this.form.valid)
+
     this.passwordErrorMessage = ''
     if (this.form.valid) {
       let param = this.form.value;
       this.apiService.change_password(param).subscribe(
         (response: any) => {
-         console.log(response)
+
         },
         (error: any) => {
           this.passwordErrorMessage = error?.error['detail'][2]
-          console.log(error?.error['detail'][2])
+
         }
       );
-    }else{
+    } else {
       this.formValidation()
     }
-    
+
   }
 
   formValidation() {
     const passwordErrors: any = this.form.get('new_password')?.errors; //get password errors
-    console.log(passwordErrors)
+
     if (passwordErrors) {
       if (passwordErrors.required) {
         this.passwordErrorMessage = 'Password is required.';
       } else if (passwordErrors.minlength) {
-        this.passwordErrorMessage ='Password must be at least 8 characters long.';
+        this.passwordErrorMessage = 'Password must be at least 8 characters long.';
       } else if (passwordErrors.pattern) {
         this.passwordErrorMessage =
           'Password must contain at least one uppercase letter, one lowercase letter, one number, and one special character.';
@@ -85,7 +85,7 @@ export class ProfileComponent implements OnInit {
 
 
   getProfile() {
-     const param = this.profile.id
+    const param = this.profile.id
     this.apiService.get_user_details(param).subscribe(
       (response: any) => {
         const profile = {
@@ -95,10 +95,10 @@ export class ProfileComponent implements OnInit {
 
         window.sessionStorage.setItem("profile", JSON.stringify(profile));
         this.profile = profile;
-        console.log(profile)
+
       },
-      (error:any) => {
-        console.log(error)
+      (error: any) => {
+
       }
     );
   }
@@ -114,10 +114,10 @@ export class ProfileComponent implements OnInit {
       (data) => {
         const result = data;
 
-        setTimeout(()=>{
+        setTimeout(() => {
           window.location.reload()
-        },100)
-        
+        }, 100)
+
       },
       (reason) => {
         // on dismiss
@@ -141,24 +141,23 @@ export class ProfileComponent implements OnInit {
     );
   }
 
-  updaloadNationalId(){
-    if(this.nid_doc){
+  updaloadNationalId() {
+    if (this.nid_doc) {
       this.apiService.upload_national_id(this.formData).subscribe(
         (response: any) => {
-          console.log('response',response)
+
           this.getProfile()
         },
         (error: any) => {
-          //this.isLoading = false;
-          console.log(error?.error)
+
         }
       )
-    }else{
+    } else {
       return
     }
   }
 
-  downloadNid(){
+  downloadNid() {
     window.open(this.profile?.nid_document)
   }
 
@@ -167,24 +166,24 @@ export class ProfileComponent implements OnInit {
     if ($event.target.files && ($event.target.files[0] as File)) {
       const file = $event.target.files[0] as File;
       this.nid_doc = file
-        this.formData.append('nid_document', file);      
+      this.formData.append('nid_document', file);
     }
   }
 
-  onFileSelected($event: any): void{
+  onFileSelected($event: any): void {
     if ($event.target.files && ($event.target.files[0] as File)) {
       const file = $event.target.files[0] as File;
-        this.formData.append('profile_photo', file);  
-        const user_id = this.profile?.id
-        this.apiService.update_user_profile_pic(user_id, this.formData).subscribe(
-          (response: any) => {
-            console.log('response',response)
-            this.getProfile()
-          },
-          (error: any) => {
-            console.log(error?.error)
-          }
-        )    
+      this.formData.append('profile_photo', file);
+      const user_id = this.profile?.id
+      this.apiService.update_user_profile_pic(user_id, this.formData).subscribe(
+        (response: any) => {
+
+          this.getProfile()
+        },
+        (error: any) => {
+
+        }
+      )
     }
   }
 
