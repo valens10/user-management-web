@@ -1,34 +1,63 @@
 <div class="container">
-    <div class="row justify-content-center">
-      <div class="col-md-6">
-        <div class="card mt-5">
-          <div class="card-header">Login</div>
-          <div class="card-body">
-            <form [formGroup]="userForm">
-              <div class="form-group">
-                <label for="email" class="p-1">Email address</label>
-                <input type="email" class="form-control" formControlName="username" required id="email" aria-describedby="emailHelp" placeholder="Enter email">
-              </div>
-            </form>
-            <div class="alert alert-danger mt-1 mb-1 p-2" role="alert" *ngIf="errorMsg">
-              {{errorMsg}}
+  <div class="row justify-content-center">
+    <div class="col-md-6">
+      <div class="card mt-5">
+        <div class="card-header">Login</div>
+        <div class="card-body">
+          <form [formGroup]="userForm">
+            <div class="form-group">
+              <label for="email" class="p-1">Email address</label>
+              <input
+                type="email"
+                class="form-control"
+                formControlName="username"
+                required
+                id="email"
+                aria-describedby="emailHelp"
+                placeholder="Enter email"
+              />
             </div>
-            <button type="submit" *ngIf="!isLoading" class="btn btn-primary btn-block mt-3 w-100" (click)="onSubmit()">Login</button>
+          </form>
+          <div
+            class="alert alert-danger mt-1 mb-1 p-2"
+            role="alert"
+            *ngIf="errorMsg"
+          >
+            {{ errorMsg }}
+          </div>
+          <button
+            type="submit"
+            *ngIf="!isLoading"
+            class="btn btn-primary btn-block mt-3 w-100"
+            (click)="onSubmit()"
+          >
+            Login
+          </button>
 
-            <div class="_loading w-100 d-flex justify-content-center">
-              <img class="loading-img" *ngIf="isLoading" src="../../../assets/Loading_icon.gif" alt="">
-            </div>
-
+          <div class="_loading w-100 d-flex justify-content-center">
+            <img
+              class="loading-img"
+              *ngIf="isLoading"
+              src="../../../assets/Loading_icon.gif"
+              alt=""
+            />
           </div>
         </div>
-        <div class="text-center justify-content-between d-flex mt-3">
-          <a href="" routerLink="/auth/reset-password">Forgot password?</a>
-          <div class="end-section">
-            <a class="me-3 magic-link" (click)="getMagicLink()">Login with magic link</a>
-            <button class="border border-0 text-white bg-primary" routerLink="/auth/register">Sign up</button>
-          </div>
+      </div>
+      <div class="text-center justify-content-between d-flex mt-3">
+        <a href="" routerLink="/auth/reset-password">Forgot password?</a>
+        <div class="end-section">
+          <a class="me-3 magic-link" (click)="getMagicLink()"
+            >Login with magic link</a
+          >
+          <button
+            class="border border-0 text-white bg-primary"
+            routerLink="/auth/register"
+          >
+            Sign up
+          </button>
         </div>
       </div>
     </div>
   </div>
-  
+</div>

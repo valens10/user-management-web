@@ -4,6 +4,8 @@ import { Router } from '@angular/router';
 import { AuthService } from '../service/auth.service';
 import Swal from 'sweetalert2';
 
+
+
 @Component({
   selector: 'app-reset-password',
   templateUrl: './reset-password.component.html',
@@ -14,7 +16,7 @@ export class ResetPasswordComponent implements OnInit {
   errorMsg = '';
   isLoading = false
   sucessMsg = ''
-  email:any = ''
+  email: any = ''
   is_code_sent = false
   passwordErrorMessage = '';
   formGroup!: FormGroup;
@@ -41,7 +43,7 @@ export class ResetPasswordComponent implements OnInit {
   createForm() {
     this.formGroup = this.fb.group({
       code: ['', Validators.required],
-      password: ['',[Validators.required,Validators.minLength(8),Validators.pattern(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*()_+])[a-zA-Z\d!@#$%^&*()_+]{8,}$/),],
+      password: ['', [Validators.required, Validators.minLength(8), Validators.pattern(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*()_+])[a-zA-Z\d!@#$%^&*()_+]{8,}$/),],
       ],
     });
   }
@@ -54,21 +56,21 @@ export class ResetPasswordComponent implements OnInit {
       param['username'] = this.email
       this.isLoading = true
       this.apiService.change_password(param).subscribe(
-        (res:any) => {
+        (res: any) => {
           this.sucessMsg = 'Your password has been changed successful.'
-          console.log('res', res);
+
           this.successAlert(this.sucessMsg)
           this.isLoading = false
         },
         (err) => {
           this.errorMsg = err?.error['detail'];
-          console.log('error--', this.errorMsg);
+
           this.isLoading = false
 
         }
       );
     } else {
-     this.formValidation()
+      this.formValidation()
     }
   }
 
@@ -80,7 +82,7 @@ export class ResetPasswordComponent implements OnInit {
       if (passwordErrors.required) {
         this.passwordErrorMessage = 'Password is required.';
       } else if (passwordErrors.minlength) {
-        this.passwordErrorMessage ='Password must be at least 8 characters long.';
+        this.passwordErrorMessage = 'Password must be at least 8 characters long.';
       } else if (passwordErrors.pattern) {
         this.passwordErrorMessage =
           'Password must contain at least one uppercase letter, one lowercase letter, one number, and one special character.';
@@ -90,31 +92,32 @@ export class ResetPasswordComponent implements OnInit {
     }
   }
 
-  sendOtp(){
-    if(this.email){
+  sendOtp() {
+    if (this.email) {
       const param = {
-        username:this.email
+        username: this.email
       }
       this.apiService.request_otp(param).subscribe(
-        (res:any) => {
+        (res: any) => {
           this.sucessMsg = res['detail']
           this.is_code_sent = true
         },
         (err) => {
           this.is_code_sent = false
           this.errorMsg = err?.error['detail'];
-          console.log('error--', this.errorMsg);
+
         }
       );
-    }else{
+    } else {
       this.errorMsg = 'Email is required'
     }
   }
 
- // Success alert
- successAlert(message:any) {
-  let timerInterval:any
-    Swal.fire({icon: 'success', title: 'Account Reset', html: `${message}`, timer: 2000, timerProgressBar: true,
+  // Success alert
+  successAlert(message: any) {
+    let timerInterval: any
+    Swal.fire({
+      icon: 'success', title: 'Account Reset', html: `${message}`, timer: 2000, timerProgressBar: true,
       didOpen: () => {
         Swal.showLoading()
       },
@@ -127,6 +130,6 @@ export class ResetPasswordComponent implements OnInit {
         this.router.navigate(['/auth/login']);
       }
     })
-}
+  }
 
 }

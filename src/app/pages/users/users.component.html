@@ -1,27 +1,23 @@
 <div class="container-fluid">
   <div class="row mt-2">
     <div class="col-12">
-      <div
-        class="page-title-box d-flex align-items-center"
-      >
+      <div class="page-title-box d-flex align-items-center">
         <div>
-          <h4 class="mb-0 font-size-18">UserS</h4>
-          <div class="group-description">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Possimus
-          </div>
+          <h4 class="mb-0 font-size-18">Users</h4>
+          <div class="group-description">User account management</div>
         </div>
       </div>
     </div>
   </div>
-  
+
   <div class="card mt-3">
-        <input
-          type="search"
-          (keyup)="searchuser($event)"
-          class="form-control border-none p-2"
-          placeholder="Search user"
-          style="border: 0;"
-        />
+    <input
+      type="search"
+      (keyup)="searchuser($event)"
+      class="form-control border-none p-2"
+      placeholder="Search user"
+      style="border: 0"
+    />
   </div>
 
   <div class="card mt-3">
@@ -34,27 +30,46 @@
             <th>National ID</th>
             <th>Gender</th>
             <th>Age</th>
-            <th>Verification</th>
+            <th>Status</th>
             <th>Action</th>
           </tr>
         </thead>
         <tbody>
           <tr *ngFor="let user of users">
-            <td>{{user?.first_name | titlecase}} {{user?.last_name | titlecase}}</td>
-            <td>{{user?.email}}</td>
-            <td>{{user?.nid_number}}</td>
+            <td>
+              {{ user?.first_name | titlecase }}
+              {{ user?.last_name | titlecase }}
+            </td>
+            <td>{{ user?.email }}</td>
+            <td>{{ user?.nid_number }}</td>
             <td>
               <span class="" *ngIf="user?.gender == 'MALE'">Male</span>
               <span class="" *ngIf="user?.gender == 'FEMALE'">Female</span>
             </td>
-            <td>{{user?.age}}</td>
+            <td>{{ user?.age }}</td>
             <td>
-              <span class="s-verified text-danger" *ngIf="user?.verification_status == 'UNVERIFIED'">Unverified</span>
-              <span class="s-verified" style="color: green;" *ngIf="user?.verification_status == 'VERIFIED'">Verified</span>
-              <span class="s-verified text-warning" *ngIf="user?.verification_status == 'PENDING VERIFICATION'">Pending Verification</span>
+              <span
+                class="s-verified text-danger"
+                *ngIf="user?.verification_status == 'UNVERIFIED'"
+                >Unverified</span
+              >
+              <span
+                class="s-verified"
+                style="color: green"
+                *ngIf="user?.verification_status == 'VERIFIED'"
+                >Verified</span
+              >
+              <span
+                class="s-verified text-warning"
+                *ngIf="user?.verification_status == 'PENDING VERIFICATION'"
+                >Pending Verification</span
+              >
             </td>
             <td class="d-flex align-item-center">
-              <button class="a-btn me-2 text-info" (click)="verifyUser(user)">Verification</button> | 
+              <button class="a-btn me-2 text-info" (click)="verifyUser(user)">
+                Verify
+              </button>
+              |
               <button class="a-btn ms-2 text-danger">Delete</button>
             </td>
           </tr>
@@ -63,4 +78,3 @@
     </div>
   </div>
 </div>
-

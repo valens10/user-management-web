@@ -4,9 +4,7 @@
       <div class="page-title-box d-flex align-items-center">
         <div>
           <h4 class="mb-0 font-size-18">Profile</h4>
-          <div class="profile-description">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Possimus
-          </div>
+          <div class="profile-description">User profile management</div>
         </div>
       </div>
     </div>
@@ -26,19 +24,30 @@
         <ng-template ngbNavContent>
           <div class="card mt-3 d-flex flex-wrap flex-row align-items-start">
             <div class="prof d-flex flex-wrap flex-column p-5 me-5">
-              <img class="card-img-top " *ngIf="!profile?.profile_photo" [src]="profPic" alt="">
-              <div
-              class="_profile-picture"
-            >
-            <div class="profile-picture card-img-top" 
-              *ngIf="profile?.profile_photo" 
-              [style.background-image]="'url(' + profile?.profile_photo + ')'">
-          </div>
-              <label for="file-upload" class="custom-file-upload mt-2">
-                Change Photo
-              </label>
-              <input type="file" id="file-upload" accept="image/*" (change)="onFileSelected($event)" />
-            </div>
+              <img
+                class="card-img-top"
+                *ngIf="!profile?.profile_photo"
+                [src]="profPic"
+                alt=""
+              />
+              <div class="_profile-picture">
+                <div
+                  class="profile-picture card-img-top"
+                  *ngIf="profile?.profile_photo"
+                  [style.background-image]="
+                    'url(' + profile?.profile_photo + ')'
+                  "
+                ></div>
+                <label for="file-upload" class="custom-file-upload mt-2">
+                  Change Photo
+                </label>
+                <input
+                  type="file"
+                  id="file-upload"
+                  accept="image/*"
+                  (change)="onFileSelected($event)"
+                />
+              </div>
             </div>
 
             <div class="p-2 flex-grow-1">
@@ -93,8 +102,11 @@
               </div>
             </div>
           </div>
-          <a class="btn btn-primary mt-3" (click)="openEditUserModal()"
-            >Edit Profile</a
+
+          <a
+            class="btn btn-primary mt-3 update-profile"
+            (click)="openEditUserModal()"
+            >Update Profile</a
           >
         </ng-template>
       </li>
@@ -132,7 +144,10 @@
                 <div class="col">
                   <input
                     type="file"
-                    *ngIf="!profile?.nid_document && profile?.verification_status == 'UNVERIFIED'"
+                    *ngIf="
+                      !profile?.nid_document &&
+                      profile?.verification_status == 'UNVERIFIED'
+                    "
                     required
                     (change)="onFIdSelectionChange($event)"
                   />
@@ -157,7 +172,10 @@
           </div>
           <button
             type="button"
-            *ngIf="!profile?.nid_document && profile?.verification_status == 'UNVERIFIED' "
+            *ngIf="
+              !profile?.nid_document &&
+              profile?.verification_status == 'UNVERIFIED'
+            "
             class="btn btn-primary btn-block mt-3 w-100"
             (click)="updaloadNationalId()"
           >
@@ -177,7 +195,7 @@
                   <label for="password" class="p-1">Old Password</label>
                   <input
                     type="password"
-                    class="form-control"
+                    class="form-control w-50"
                     id="password"
                     formControlName="password"
                     placeholder="Password"
@@ -187,7 +205,7 @@
                   <label for="password1" class="p-1">New Password</label>
                   <input
                     type="password"
-                    class="form-control"
+                    class="form-control w-50"
                     id="password1"
                     formControlName="new_password"
                     placeholder="New Password"
@@ -199,7 +217,7 @@
               </form>
               <button
                 type="button"
-                class="btn btn-primary btn-block mt-3 w-100"
+                class="btn update-profile btn-primary btn-block mt-3"
                 (click)="changePassword()"
               >
                 Update Password

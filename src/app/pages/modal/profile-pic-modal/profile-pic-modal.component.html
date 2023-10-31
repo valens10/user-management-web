@@ -1,18 +1,18 @@
 <div class="modal-header bg-primary m-0">
-    <div class="d-flex justify-content-start">
-      <h6 class="modal-title text-white">National ID Document</h6>
-    </div>
+  <div class="d-flex justify-content-start">
+    <h6 class="modal-title text-white">National ID Document</h6>
   </div>
-  <div class="modal-body">
-    <img
-    [src]="nid_doc"
-    class="card-img-top"
-    alt="Profile Picture"
-  />
+</div>
+<div class="modal-body">
+  <img [src]="nid_doc" class="card-img-top" alt="Profile Picture" />
+</div>
+<div class="modal-footer">
+  <div class="w-100 text-end">
+    <button
+      class="border border-0 text-danger bg-transparent"
+      (click)="ref.close()"
+    >
+      Close
+    </button>
   </div>
-  <div class="modal-footer">
-    <div class="w-100 text-end">
-      <button class="border border-0 text-danger bg-transparent" (click)="ref.close()">Close</button>
-    </div>
-  </div>
-  
+</div>

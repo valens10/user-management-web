@@ -15,7 +15,7 @@ export class LoginComponent implements OnInit {
   sucessMsg = ''
   passwordErrorMessage = ''
   userForm!: FormGroup;
-  constructor(private apiService: AuthService, private fb: FormBuilder,private router: Router) {}
+  constructor(private apiService: AuthService, private fb: FormBuilder, private router: Router) { }
 
   ngOnInit(): void {
     this.createForm();
@@ -31,51 +31,51 @@ export class LoginComponent implements OnInit {
   onSubmit() {
     if (this.userForm.valid) {
       this.errorMsg = ''
-      const param = this.userForm.value
+      let param = this.userForm.value
       sessionStorage.setItem('username', param['username'])
       this.isLoading = true
-      this.apiService.request_otp(param).subscribe((res:any)=>{
+      this.apiService.request_otp(param).subscribe((res: any) => {
         this.sucessMsg = res['detail']
-        this.isLoading = true
-        console.log('res',res)
+        this.isLoading = false
+
         window.location.href = '/auth/otp-verification'
-      },err=>{
-        this.errorMsg =err?.error['detail']
-        console.log('error--', this.errorMsg)
-        this.isLoading = true
+      }, err => {
+        this.errorMsg = err?.error['detail']
+
+        this.isLoading = false
       })
     } else {
       this.errorMsg = 'Email is required'
     }
   }
 
-  getMagicLink(){
+  getMagicLink() {
     this.errorMsg = ''
     if (this.userForm.valid) {
       const param = this.userForm.value;
       this.isLoading = true
       this.apiService.generate_magic_link(param).subscribe(
         (res: any) => {
-          console.log(res)
+
           this.magicAlert()
         },
         (err: any) => {
-          this.errorMsg =err?.error['detail']
-          console.log('error--', this.errorMsg)
+          this.errorMsg = err?.error['detail']
+
           this.isLoading = false
         }
       );
-    }else{
+    } else {
       this.errorMsg = 'Email is required'
     }
   }
 
-  magicAlert(){
+  magicAlert() {
     Swal.fire(
       'Login With Magic link',
       'The login link has been sent successful to your email.',
       'info'
-    ).then(()=>{
+    ).then(() => {
       this.isLoading = false
     })
   }

@@ -1,28 +1,49 @@
-<nav class="navbar fixed-top navbar-lightd-flex justify-content-between" style="background-color: #3F4EF3;">
-    <a class="navbar-brand ps-2 text-white" href="#">UMS</a>
+<nav
+  class="navbar fixed-top navbar-lightd-flex justify-content-between"
+  style="background-color: #3f4ef3"
+>
+  <a class="navbar-brand ps-2 text-white" href="#">UMS</a>
 
-    <div class="btn-group me-3">
-      <div class="btn-group" ngbDropdown role="group" aria-label="Button group with nested dropdown">
-        <button type="button" class="btn btn-transparent text-white dropdown-toggle-split" ngbDropdownToggle></button>
-        <div class="dropdown-menu" ngbDropdownMenu>
-          <button ngbDropdownItem routerLink="../ums/profile">Profile 
-            <span class="s-verified text-danger" *ngIf="profile?.verification_status == 'UNVERIFIED'">Unverified</span>
-            <span class="s-verified" *ngIf="profile?.verification_status == 'VERIFIED'">Verified</span>
-            <span class="s-verified text-warning" *ngIf="profile?.verification_status == 'PENDING VERIFICATION'">Pending Verification</span>
-          </button>
-          <button ngbDropdownItem class="text-danger" (click)="logout()">Logout</button>
-        </div>
+  <div class="btn-group me-3">
+    <div
+      class="btn-group"
+      ngbDropdown
+      role="group"
+      aria-label="Button group with nested dropdown"
+    >
+      <button
+        type="button"
+        class="btn btn-transparent text-white dropdown-toggle-split"
+        ngbDropdownToggle
+      ></button>
+      <div class="dropdown-menu" ngbDropdownMenu>
+        <button ngbDropdownItem routerLink="../ums/profile">Profile</button>
+        <button ngbDropdownItem class="text-danger" (click)="logout()">
+          Logout
+        </button>
       </div>
-      <button type="button" class="btn btn-transparent text-white" *ngIf="!profile?.first_name">{{profile?.email}}</button>
-      <button type="button" class="btn btn-transparent text-white" *ngIf="profile?.first_name">{{profile?.first_name}} {{profile?.last_name}}</button>
     </div>
-
-  </nav>
-  
-  <app-side-nav
-    [isExpanded]="sidebarExpanded"
-    (toggleSidebar)="sidebarExpanded = !sidebarExpanded"
-  ></app-side-nav>
-  <div class="content" [ngClass]="{ sidebarExpanded: sidebarExpanded }">
-    <router-outlet></router-outlet>
+    <button
+      type="button"
+      class="btn btn-transparent text-white"
+      *ngIf="!profile?.first_name"
+    >
+      {{ profile?.email }}
+    </button>
+    <button
+      type="button"
+      class="btn btn-transparent text-white"
+      *ngIf="profile?.first_name"
+    >
+      {{ profile?.first_name }} {{ profile?.last_name }}
+    </button>
   </div>
+</nav>
+
+<app-side-nav
+  [isExpanded]="sidebarExpanded"
+  (toggleSidebar)="sidebarExpanded = !sidebarExpanded"
+></app-side-nav>
+<div class="content" [ngClass]="{ sidebarExpanded: sidebarExpanded }">
+  <router-outlet></router-outlet>
+</div>

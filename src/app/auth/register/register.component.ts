@@ -14,7 +14,7 @@ export class RegisterComponent implements OnInit {
   errorMsg = '';
   sucessMsg = ''
   isLoading = false
-  email:any = ''
+  email: any = ''
   is_code_sent = false
   passwordErrorMessage = '';
   formGroup!: FormGroup;
@@ -41,7 +41,7 @@ export class RegisterComponent implements OnInit {
   createForm() {
     this.formGroup = this.fb.group({
       code: ['', Validators.required],
-      password: ['',[Validators.required,Validators.minLength(8),Validators.pattern(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*()_+])[a-zA-Z\d!@#$%^&*()_+]{8,}$/),],
+      password: ['', [Validators.required, Validators.minLength(8), Validators.pattern(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*()_+])[a-zA-Z\d!@#$%^&*()_+]{8,}$/),],
       ],
     });
   }
@@ -52,22 +52,23 @@ export class RegisterComponent implements OnInit {
     if (this.formGroup.valid) {
       const param = this.formGroup.value;
       param['username'] = this.email
+
       this.isLoading = true
       this.apiService.change_password(param).subscribe(
-        (res:any) => {
+        (res: any) => {
           this.sucessMsg = 'Your account has been created successful. '
-          console.log('res', res);
+
           this.successAlert(this.sucessMsg)
           this.isLoading = false
         },
         (err) => {
           this.errorMsg = err?.error['detail'];
-          console.log('error--', this.errorMsg);
+
           this.isLoading = false
         }
       );
     } else {
-     this.formValidation()
+      this.formValidation()
     }
   }
 
@@ -78,7 +79,7 @@ export class RegisterComponent implements OnInit {
       if (passwordErrors.required) {
         this.passwordErrorMessage = 'Password is required.';
       } else if (passwordErrors.minlength) {
-        this.passwordErrorMessage ='Password must be at least 8 characters long.';
+        this.passwordErrorMessage = 'Password must be at least 8 characters long.';
       } else if (passwordErrors.pattern) {
         this.passwordErrorMessage =
           'Password must contain at least one uppercase letter, one lowercase letter, one number, and one special character.';
@@ -88,14 +89,15 @@ export class RegisterComponent implements OnInit {
     }
   }
 
-  sendOtp(){
-    if(this.email){
+  sendOtp() {
+    if (this.email) {
       const param = {
-        username:this.email
+        username: this.email,
+        is_register: true
       }
       this.isLoading = true
       this.apiService.request_otp(param).subscribe(
-        (res:any) => {
+        (res: any) => {
           this.sucessMsg = res['detail']
           this.is_code_sent = true
           this.isLoading = false
@@ -103,32 +105,33 @@ export class RegisterComponent implements OnInit {
         (err) => {
           this.is_code_sent = false
           this.errorMsg = err?.error['detail'];
-          console.log('error--', this.errorMsg);
+
           this.isLoading = false
         }
       );
-    }else{
+    } else {
       this.errorMsg = 'Email is required'
     }
   }
 
 
   // Success alert
-  successAlert(message:any) {
-    let timerInterval:any
-      Swal.fire({icon: 'success', title: 'Registration', html: `${message}`, timer: 2000, timerProgressBar: true,
-        didOpen: () => {
-          Swal.showLoading()
-        },
-        willClose: () => {
-          clearInterval(timerInterval)
-        }
-      }).then((result) => {
-        /* Read more about handling dismissals below */
-        if (result.dismiss === Swal.DismissReason.timer) {
-          this.router.navigate(['/auth/login']);
-        }
-      })
+  successAlert(message: any) {
+    let timerInterval: any
+    Swal.fire({
+      icon: 'success', title: 'Registered', html: `${message}`, timer: 2000, timerProgressBar: true,
+      didOpen: () => {
+        Swal.showLoading()
+      },
+      willClose: () => {
+        clearInterval(timerInterval)
+      }
+    }).then((result) => {
+      /* Read more about handling dismissals below */
+      if (result.dismiss === Swal.DismissReason.timer) {
+        this.router.navigate(['/auth/login']);
+      }
+    })
   }
 
 }
