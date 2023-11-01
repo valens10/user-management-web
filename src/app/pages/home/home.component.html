@@ -28,6 +28,19 @@
       *ngIf="profile?.verification_status == 'VERIFIED'"
       >Your Account is Verified</span
     >
+
+    <div
+      class="verified-badge"
+      *ngIf="profile?.verification_status == 'VERIFIED'"
+    >
+      <div
+        class="badge-circle"
+        *ngIf="profile?.verification_status == 'VERIFIED'"
+      >
+        <div class="checkmark"></div>
+      </div>
+    </div>
+
     <span
       class="s-verified text-warning status"
       *ngIf="profile?.verification_status == 'PENDING VERIFICATION'"

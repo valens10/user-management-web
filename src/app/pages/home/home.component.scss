@@ -8,10 +8,38 @@ a {
 }
 
 .status {
-  margin-top: -26px !important;
+  //margin-top: -26px !important;
   background-color: #f7f7f7;
   border-radius: 6px;
   font-size: 13px;
   color: black !important;
   padding: 3px !important;
+}
+
+.verified-badge {
+  width: 40px;
+  height: 40px;
+  background-color: #1da1f2;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+}
+
+.badge-circle {
+  width: 30px;
+  height: 30px;
+  background-color: white;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.checkmark {
+  width: 20px;
+  height: 20px;
+  background-color: #1da1f2;
+  clip-path: polygon(0 46%, 22% 100%, 100% 0);
 }

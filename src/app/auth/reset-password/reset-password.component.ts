@@ -105,7 +105,6 @@ export class ResetPasswordComponent implements OnInit {
         (err) => {
           this.is_code_sent = false
           this.errorMsg = err?.error['detail'];
-
         }
       );
     } else {
@@ -113,7 +112,7 @@ export class ResetPasswordComponent implements OnInit {
     }
   }
 
-  // Success alert
+  // Success alert  
   successAlert(message: any) {
     let timerInterval: any
     Swal.fire({
